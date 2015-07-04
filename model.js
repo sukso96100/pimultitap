@@ -6,4 +6,4 @@ var ConfigSchema = mongoose.Schema({
     state: Boolean
 });
 
-var Config = mongoose.model('Kitten', ConfigSchema);
+ mongoose.model('Config', ConfigSchema);
