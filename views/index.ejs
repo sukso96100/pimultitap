@@ -17,16 +17,32 @@
     <paper-drawer-panel>
     <paper-header-panel drawer>
       <paper-toolbar>
+        <span>Switches</span>
       </paper-toolbar>
-      <div> Drawer content... </div>
+      <div>
+      </div>
     </paper-header-panel>
     <paper-header-panel main>
       <paper-toolbar>
         <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
         <span class="flex"><%= title %></span>
+        <paper-icon-button icon="refresh"></paper-icon-button>
       </paper-toolbar>
-      <div>
+      <div align="center">
         <h1>RelaySwitch</h1>
+        <p>Switches State</p>
+        <paper-material elavation="1" style="padding:8px; margin:8px;">
+          <table style="font-size:20px;">
+            <tr><td>[1]</td><td id="n1">Switch 1</td><td>|</td><td id="s1">ON</td></tr>
+            <tr><td>[2]</td><td id="n2">Switch 2</td><td>|</td><td id="s2">ON</td></tr>
+            <tr><td>[3]</td><td id="n3">Switch 3</td><td>|</td><td id="s3">ON</td></tr>
+            <tr><td>[4]</td><td id="n4">Switch 4</td><td>|</td><td id="s4">ON</td></tr>
+            <tr><td>[5]</td><td id="n5">Switch 5</td><td>|</td><td id="s5">ON</td></tr>
+            <tr><td>[6]</td><td id="n6">Switch 6</td><td>|</td><td id="s6">ON</td></tr>
+            <tr><td>[7]</td><td id="n7">Switch 7</td><td>|</td><td id="s7">ON</td></tr>
+            <tr><td>[8]</td><td id="n8">Switch 8</td><td>|</td><td id="s8">ON</td></tr>
+          </table>
+        </paper-material>
       </div>
     </paper-header-panel>
   </paper-drawer-panel>
