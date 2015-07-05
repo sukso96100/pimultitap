@@ -17,6 +17,7 @@
     <link rel="import" href="bower_components/paper-input/paper-input-container.html">
     <link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
     <script src="/javascripts/util.js"></script>
+    <script src="/javascripts/settings.js"></script>
   </head>
   <body>
     <paper-drawer-panel>
@@ -30,7 +31,7 @@
     </paper-menu>
     <paper-menu>
       <% for(var i=0; i<state.length; i++) {%>
-        <paper-icon-item><iron-icon icon="extension" item-icon></iron-icon>[<%= state[i].num %>] <%= state[i].name %></paper-icon-item>
+        <paper-icon-item onclick="loadPref(<%= state[i].num %>)"><iron-icon icon="extension" item-icon></iron-icon>[<%= state[i].num %>] <%= state[i].name %></paper-icon-item>
       <% } %>
    </paper-menu>
       </div>
