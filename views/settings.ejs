@@ -40,12 +40,12 @@
       <paper-toolbar>
         <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
         <span class="flex"><%= title %></span>
-        <!-- <paper-icon-button icon="refresh"></paper-icon-button> -->
+        <paper-icon-button icon="save" onclick="savePref()"></paper-icon-button>
       </paper-toolbar>
       <div>
         <paper-material elavation="1" style="padding:24px; margin:24px;">
           <h1><iron-icon icon="extension"></iron-icon> <b id="name">Switch 0</b></h1><br>
-          <paper-toggle-button></paper-toggle-button><br><br>
+          <paper-toggle-button id="toggle"></paper-toggle-button><br><br>
             <paper-input-container>
               <label>Name</label>
               <input type="text" id="name-input" value="Switch 0">

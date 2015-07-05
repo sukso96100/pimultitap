@@ -31,6 +31,26 @@ router.get('/load/:num', function(req, res, next) {
   })
 });
 
+router.post('/save/:num', function(req, res, next) {
+  console.log("POST /save/ Request");
+
+  var reqnum = req.params.num;
+  console.log(reqnum);
+  var reqdata = JSON.parse(req.body);
+  console.log(reqdata);
+  // Query Config
+  console.log("Querying Config from DB");
+  var query = SwitchesConfig.findOne({num:reqnum});
+  query.exec(function (err, config) {
+    if (err) return handleError(err);
+    console.log(config);
+    config.name = reqdata.name;
+    config.state = reqdata.state;
+    config.save();
+      // res.send(config);
+  })
+});
+
 //Function that sorts an array of objects by key
 function sortByKey(array, key) {
   return array.sort(function(a, b) {
@@ -39,9 +59,4 @@ function sortByKey(array, key) {
   });
 }
 
-function getHash(requrl) {
-    var hash = url.parse(requrl).hash.replace("#!","")
-    console.log(hash)
-    return hash;
-}
 module.exports = router;
