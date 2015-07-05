@@ -6,6 +6,8 @@ var SwitchesConfig = mongoose.model( 'SwitchesConfig' );
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  var query = SwitchesConfig.findOne({ 'num': 1 });
+
   res.render('index', { title: 'RelaySwitch' });
 });
 
