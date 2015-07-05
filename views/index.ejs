@@ -14,6 +14,7 @@
     <link rel="import" href="/bower_components/paper-material/paper-material.html"/>
     <link rel="import" href="/bower_components/paper-menu/paper-menu.html"/>
     <link rel="import" href="/bower_components/paper-item/paper-icon-item.html">
+    <script src="/javascripts/util.js"></script>
   </head>
   <body>
     <paper-drawer-panel>
@@ -23,7 +24,7 @@
       </paper-toolbar>
       <div>
         <paper-menu>
-      <paper-icon-item onclick="openLoaderPage()"><iron-icon icon="settings" item-icon></iron-icon>Settings</paper-icon-item>
+      <paper-icon-item onclick="href('/settings')"><iron-icon icon="settings" item-icon></iron-icon>Settings</paper-icon-item>
        <paper-icon-item onclick="saveFormData()"><iron-icon icon="info" item-icon></iron-icon>About</paper-icon-item>
        <paper-icon-item onclick="printContent()"><iron-icon icon="code" item-icon></iron-icon>Get Source</paper-icon-item>
    </paper-menu>
@@ -38,16 +39,11 @@
       <div align="center">
         <h1>RelaySwitch</h1>
         <p>Switches State<br>true = ON / false = OFF</p>
-        <paper-material elavation="1" style="padding:16px; margin:16px;">
+        <paper-material elavation="1" style="padding:24px; margin:24px;">
           <table style="font-size:20px;">
-            <tr><td>[1]</td><td id="n0"><%= state[0].name %></td><td>|</td><td id="s0"><%= state[0].state %></td></tr>
-            <tr><td>[2]</td><td id="n1"><%= state[1].name %></td><td>|</td><td id="s1"><%= state[1].state %></td></tr>
-            <tr><td>[3]</td><td id="n2"><%= state[2].name %></td><td>|</td><td id="s2"><%= state[2].state %></td></tr>
-            <tr><td>[4]</td><td id="n3"><%= state[3].name %></td><td>|</td><td id="s3"><%= state[3].state %></td></tr>
-            <tr><td>[5]</td><td id="n4"><%= state[4].name %></td><td>|</td><td id="s4"><%= state[4].state %></td></tr>
-            <tr><td>[6]</td><td id="n5"><%= state[5].name %></td><td>|</td><td id="s5"><%= state[5].state %></td></tr>
-            <tr><td>[7]</td><td id="n6"><%= state[6].name %></td><td>|</td><td id="s6"><%= state[6].state %></td></tr>
-            <tr><td>[8]</td><td id="n7"><%= state[7].name %></td><td>|</td><td id="s7"><%= state[7].state %></td></tr>
+            <% for(var i=0; i<state.length; i++) {%>
+                 <tr><td>[<%= state[i].num %>]</td><td id="n0"><%= state[i].name %></td><td>|</td><td id="s0"><%= state[i].state %></td></tr>
+            <% } %>
           </table>
         </paper-material>
       </div>

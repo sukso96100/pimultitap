@@ -12,36 +12,44 @@
     <link rel="import" href="/bower_components/iron-icon/iron-icon.html"/>
     <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html"/>
     <link rel="import" href="/bower_components/paper-material/paper-material.html"/>
+    <link rel="import" href="/bower_components/paper-menu/paper-menu.html"/>
+    <link rel="import" href="/bower_components/paper-item/paper-icon-item.html">
+    <link rel="import" href="bower_components/paper-input/paper-input-container.html">
+    <link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
+    <script src="/javascripts/util.js"></script>
   </head>
-  <body  >
+  <body>
     <paper-drawer-panel>
     <paper-header-panel drawer>
       <paper-toolbar>
-        <span>Switches</span>
+        <span>Menu</span>
       </paper-toolbar>
       <div>
+        <paper-menu>
+      <paper-icon-item onclick="href('/')"><iron-icon icon="home" item-icon></iron-icon>Home</paper-icon-item>
+    </paper-menu>
+    <paper-menu>
+      <% for(var i=0; i<state.length; i++) {%>
+        <paper-icon-item><iron-icon icon="extension" item-icon></iron-icon>[<%= state[i].num %>] <%= state[i].name %></paper-icon-item>
+      <% } %>
+   </paper-menu>
       </div>
     </paper-header-panel>
     <paper-header-panel main>
       <paper-toolbar>
         <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
         <span class="flex"><%= title %></span>
-        <paper-icon-button icon="refresh"></paper-icon-button>
+        <!-- <paper-icon-button icon="refresh"></paper-icon-button> -->
       </paper-toolbar>
-      <div align="center">
-        <h1>RelaySwitch</h1>
-        <p>Switches State</p>
-        <paper-material elavation="1" style="padding:8px; margin:8px;">
-          <table style="font-size:20px;">
-            <tr><td>[1]</td><td id="n1">Switch 1</td><td>|</td><td id="s1">ON</td></tr>
-            <tr><td>[2]</td><td id="n2">Switch 2</td><td>|</td><td id="s2">ON</td></tr>
-            <tr><td>[3]</td><td id="n3">Switch 3</td><td>|</td><td id="s3">ON</td></tr>
-            <tr><td>[4]</td><td id="n4">Switch 4</td><td>|</td><td id="s4">ON</td></tr>
-            <tr><td>[5]</td><td id="n5">Switch 5</td><td>|</td><td id="s5">ON</td></tr>
-            <tr><td>[6]</td><td id="n6">Switch 6</td><td>|</td><td id="s6">ON</td></tr>
-            <tr><td>[7]</td><td id="n7">Switch 7</td><td>|</td><td id="s7">ON</td></tr>
-            <tr><td>[8]</td><td id="n8">Switch 8</td><td>|</td><td id="s8">ON</td></tr>
-          </table>
+      <div>
+        <paper-material elavation="1" style="padding:24px; margin:24px;">
+          <h1><iron-icon icon="extension"></iron-icon> <b id="name">Switch 0</b></h1><br>
+          <paper-toggle-button></paper-toggle-button><br><br>
+            <paper-input-container>
+              <label>Name</label>
+              <input type="text" id="name-input" value="Switch 0">
+            </paper-input-container>
+
         </paper-material>
       </div>
     </paper-header-panel>

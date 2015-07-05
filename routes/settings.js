@@ -13,9 +13,14 @@ router.get('/', function(req, res, next) {
     if (err) return handleError(err);
     console.log(config);
     config = sortByKey(config,'num');
-    res.render('index', { title: 'RelaySwitch - Settings', state: config });
+    res.render('settings', { title: 'Settings', state: config });
   })
-
 });
-
+//Function that sorts an array of objects by key
+function sortByKey(array, key) {
+  return array.sort(function(a, b) {
+    var x = a[key]; var y = b[key];
+    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+  });
+}
 module.exports = router;
