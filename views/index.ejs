@@ -12,14 +12,21 @@
     <link rel="import" href="/bower_components/iron-icon/iron-icon.html"/>
     <link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html"/>
     <link rel="import" href="/bower_components/paper-material/paper-material.html"/>
+    <link rel="import" href="/bower_components/paper-menu/paper-menu.html"/>
+    <link rel="import" href="/bower_components/paper-item/paper-icon-item.html">
   </head>
   <body>
     <paper-drawer-panel>
     <paper-header-panel drawer>
       <paper-toolbar>
-        <span>Switches</span>
+        <span>Menu</span>
       </paper-toolbar>
       <div>
+        <paper-menu>
+      <paper-icon-item onclick="openLoaderPage()"><iron-icon icon="settings" item-icon></iron-icon>Settings</paper-icon-item>
+       <paper-icon-item onclick="saveFormData()"><iron-icon icon="info" item-icon></iron-icon>About</paper-icon-item>
+       <paper-icon-item onclick="printContent()"><iron-icon icon="code" item-icon></iron-icon>Get Source</paper-icon-item>
+   </paper-menu>
       </div>
     </paper-header-panel>
     <paper-header-panel main>
@@ -31,7 +38,7 @@
       <div align="center">
         <h1>RelaySwitch</h1>
         <p>Switches State<br>true = ON / false = OFF</p>
-        <paper-material elavation="1" style="padding:8px; margin:8px;">
+        <paper-material elavation="1" style="padding:16px; margin:16px;">
           <table style="font-size:20px;">
             <tr><td>[1]</td><td id="n0"><%= state[0].name %></td><td>|</td><td id="s0"><%= state[0].state %></td></tr>
             <tr><td>[2]</td><td id="n1"><%= state[1].name %></td><td>|</td><td id="s1"><%= state[1].state %></td></tr>
