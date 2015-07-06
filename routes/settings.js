@@ -36,7 +36,7 @@ router.post('/save/:num', function(req, res, next) {
 
   var reqnum = req.params.num;
   console.log(reqnum);
-  var reqdata = JSON.parse(req.body);
+  var reqdata = req.body;
   console.log(reqdata);
   // Query Config
   console.log("Querying Config from DB");
