@@ -46,8 +46,11 @@ router.post('/save/:num', function(req, res, next) {
     console.log(config);
     config.name = reqdata.name;
     config.state = reqdata.state;
-    config.save();
-      // res.send(config);
+    config.save(function (err, fluffy) {
+  if (err) return console.error(err);
+  res.send("Config for Switch ''"+reqdata.name+"'' was saved!");
+});
+
   })
 });
 

@@ -33,7 +33,9 @@ function savePref(){
   req.onreadystatechange = function() {
     //Call a function when the state changes.
 	if(req.readyState == 4 && req.status == 200) {
-
+      showToast("Saved!")
+      var menuitem = document.getElementById("i"+num);
+      menuitem.innerHTML = nameInput.value;
 	 }
   }
   req.send(JSON.stringify({name:nameInput.value, state:toggle.checked}));

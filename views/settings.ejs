@@ -16,10 +16,11 @@
     <link rel="import" href="/bower_components/paper-item/paper-icon-item.html">
     <link rel="import" href="bower_components/paper-input/paper-input-container.html">
     <link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
+    <link rel="import" href="bower_components/paper-toast/paper-toast.html">
     <script src="/javascripts/util.js"></script>
     <script src="/javascripts/settings.js"></script>
   </head>
-  <body>
+  <body onload="loadPref(0)">
     <paper-drawer-panel>
     <paper-header-panel drawer>
       <paper-toolbar>
@@ -31,7 +32,11 @@
     </paper-menu>
     <paper-menu>
       <% for(var i=0; i<state.length; i++) {%>
-        <paper-icon-item onclick="loadPref(<%= state[i].num %>)"><iron-icon icon="extension" item-icon></iron-icon>[<%= state[i].num %>] <%= state[i].name %></paper-icon-item>
+        <paper-icon-item onclick="loadPref(<%= state[i].num %>)">
+          <iron-icon icon="extension" item-icon></iron-icon>
+          [<%= state[i].num %>]
+          <span id="i<%= state[i].num %>"><%= state[i].name %></span>
+        </paper-icon-item>
       <% } %>
    </paper-menu>
       </div>
@@ -55,6 +60,6 @@
       </div>
     </paper-header-panel>
   </paper-drawer-panel>
-
+    <paper-toast id="toast"></paper-toast>
   </body>
 </html>
