@@ -10,3 +10,11 @@ echo "Installing Required Bower Componenets"
 cd bower_components
 bower install
 cd ..
+
+echo "Installing Python3 and pip"
+suao apt-get install python3
+sudo python get-pip.py
+echo "Installing Python Packages - daemonocle"
+sudo pip install daemonocle
+echo "Installing Python Packages - pymongo"
+sudo pip install pymongo
