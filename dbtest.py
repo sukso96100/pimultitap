@@ -11,4 +11,4 @@ collection = db.switchesconfigs
 collection.find()
 for item in collection.find():
     print("found")
-    item
+    print(item)
