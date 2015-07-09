@@ -15,12 +15,16 @@ def main():
         level=logging.DEBUG, format='%(asctime)s [%(levelname)s] %(message)s',
     )
     logging.info('Daemon is starting')
+    #Switch Contorl
+    logging.debug('Still running')
+    client = MongoClient('mongodb://localhost:27017/')
     while True:
-        #Switch Contorl
-        logging.debug('Still running')
-        client = MongoClient()
-        client = MongoClient('mongodb://localhost/relay-switch')
-        collection = db['SwitchesConfig']
+        db = client.relayswitch
+        collection = db.switchesconfigs
+        for item in collection.find():
+            logging.debug('Controling Switch')
+            logging.info(item)
+            print(item)
 
 if __name__ == '__main__':
     daemon = daemonocle.Daemon(

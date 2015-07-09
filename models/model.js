@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 //Connect to MongoDB
 console.log("Opening DB Connection");
-mongoose.connect( 'mongodb://localhost/relay-switch' );
+mongoose.connect( 'mongodb://localhost/relayswitch' );
 //Open DB Connection
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
