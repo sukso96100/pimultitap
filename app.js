@@ -1,8 +1,8 @@
 //excute this command on terminal tfor testing
 //DEBUG=rpi-relay-control:* npm start
 
-//mongodb
-require( './models/model' );
+//sqlite orm
+var orm = require('orm');
 //
 var express = require('express');
 var path = require('path');

@@ -1,29 +1,29 @@
 var express = require('express');
 var router = express.Router();
-//DB
-var mongoose = require( 'mongoose' );
-var SwitchesConfig = mongoose.model( 'SwitchesConfig' );
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   //Check if DB Table is empty
-  SwitchesConfig.find({num : 0}, function (err, docs) {
-        if (docs.length){
+  req.models.config.find({num : 0}, function (err, config) {
+        if (config.length){
             console.log("DB Table is NOT empty!");
         }else{
           console.log("DB Table is EMPTY!");
           //Create Default Config
           for(var i=0;i<8;i++){
-            var config0 = new SwitchesConfig({ num:i, name:"Switch "+i, state:false });
-            config0.save(function (err, config) {
-              if (err) return console.error(err);
-            });
-          }
+            req.models.config.create({
+          num: i,
+          name: "Switch"+i,
+          state: false},
+          function (err, items) {
+            // err - description of the error or null
+            // items - array of inserted items
+          });}
         }
     });
     //Query Config
     console.log("Querying Config from DB");
-    var query = SwitchesConfig.find().limit(8);
+    var query = req.models.config.find().limit(8);
     query.exec(function (err, config) {
       if (err) return handleError(err);
       console.log(config);
