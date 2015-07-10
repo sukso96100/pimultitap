@@ -22,6 +22,19 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//SQLite ORM - Open DB Connection
+app.use(orm.express("sqlite://config.db", {
+    define: function (db, models, next) {
+        models.config = db.define("switchconfig", {
+        num : Number,
+        name : String,
+        state : Boolean,
+    });
+        next();
+    }
+}));
+app.listen(80);
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
