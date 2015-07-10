@@ -23,13 +23,9 @@ router.get('/', function(req, res, next) {
     });
     //Query Config
     console.log("Querying Config from DB");
-    var query = req.models.config.find().limit(8);
-    query.exec(function (err, config) {
-      if (err) return handleError(err);
-      console.log(config);
-      config = sortByKey(config,'num');
-      res.render('index', { title: 'RelaySwitch', state: config });
-    })
+    req.models.config.find({},8,function (err, configs) {
+  
+  });
 });
 
 //Function that sorts an array of objects by key

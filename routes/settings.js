@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 //DB
-var mongoose = require( 'mongoose' );
-var SwitchesConfig = mongoose.model( 'SwitchesConfig' );
 
 /* GET Settings page. */
 router.get('/', function(req, res, next) {
