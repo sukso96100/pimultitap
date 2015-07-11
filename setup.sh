@@ -16,5 +16,5 @@ suao apt-get install python3
 sudo python get-pip.py
 echo "Installing Python Packages - daemonocle"
 sudo pip install daemonocle
-echo "Installing Python Packages - pymongo"
-sudo pip install pymongo
+echo "Installing Python Packages - peewee"
+sudo pip install peewee

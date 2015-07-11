@@ -2,13 +2,19 @@ import logging
 import sys
 import time
 
-from pymongo import MongoClient
+from peewee import *
+
 print("db Test")
-client = MongoClient('mongodb://localhost/')
-db = client.relayswitch
-collection = db.switchesconfigs
-# collection.find_one()
-collection.find()
-for item in collection.find():
-    print("found")
-    print(item)
+
+db = SqliteDatabase('config.db', threadlocals=True)
+
+
+class Configs(Model):
+    num = IntegerField()
+    name = CharField()
+    state = BooleanField()
+
+    class Meta:
+        database = db
+for item in Configs.select():
+    print(item.name)

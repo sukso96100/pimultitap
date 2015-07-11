@@ -3,7 +3,7 @@ import sys
 import time
 
 import daemonocle
-from pymongo import MongoClient
+from peewee import *
 import RPi.GPIO as GPIO
 
 def cb_shutdown(message, code):
@@ -20,29 +20,31 @@ def main():
     #Switch Contorl
     logging.debug('Still running')
     #DB Setup
-    client = MongoClient('mongodb://localhost/')
+
+
     #RPi GPIO Setup
 
     print ("Setting GPIO Mode as BCM")
     GPIO.setmode(GPIO.BCM)
 
     print ("Setting Up GPIO from 2 to 9")
-    GPIO.setup(2, GPIO.OUT)
-    GPIO.setup(3, GPIO.OUT)
-    GPIO.setup(4, GPIO.OUT)
-    GPIO.setup(5, GPIO.OUT)
-    GPIO.setup(6, GPIO.OUT)
-    GPIO.setup(7, GPIO.OUT)
-    GPIO.setup(8, GPIO.OUT)
-    GPIO.setup(9, GPIO.OUT)
+    for i in range(2, 10):
+    GPIO.setup(i, GPIO.OUT)
+    
     while True:
-        db = client.relayswitch
-        collection = db.switchesconfigs
-        for item in collection.find():
-            logging.debug('Controling Switch')
-            logging.info(item)
-            print(item)
-            GPIO.output(item.num,item.state)
+        db = SqliteDatabase('config.db', threadlocals=True)
+
+        class Configs(Model):
+            num = IntegerField()
+            name = CharField()
+            state = BooleanField()
+
+            class Meta:
+                database = db
+
+        for item in Configs.select():
+            print(item.name)
+            GPIO.output(item.num+2,item.state)
 
 if __name__ == '__main__':
     daemon = daemonocle.Daemon(
