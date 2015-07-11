@@ -26,50 +26,20 @@ router.get('/load/:num', function(req, res, next) {
 });
 
 router.post('/save/:num', function(req, res, next) {
-
+    console.log("POST /save/ Request");
     var reqnum = req.params.num;
     console.log(reqnum);
     var reqdata = req.body;
     console.log(reqdata);
-    req.models.config.one({ num:reqnum }, function (err, config) {
-        // SQL: "SELECT * FROM person WHERE surname = 'Doe'"
 
-        config.name = reqdata.name;
-        config.state = reqdata.state;
-        config.save(function (err) {
-            // err.msg = "under-age";
-            res.send("OK");
-        });
+    Configs.findOne({ where: {num: reqnum}})
+    .then(function(config) {
+      config.name = reqdata.name;
+      config.state = reqdata.state;
+      config.save().then(function() {
+        res.send("Config for Switch ''"+reqdata.name+"'' was saved!");
+      });
     });
-
-
-
-
-
-
-
-
-
-  console.log("POST /save/ Request");
-
-  var reqnum = req.params.num;
-  console.log(reqnum);
-  var reqdata = req.body;
-  console.log(reqdata);
-  // Query Config
-  console.log("Querying Config from DB");
-  var query = SwitchesConfig.findOne({num:reqnum});
-  query.exec(function (err, config) {
-    if (err) return handleError(err);
-    console.log(config);
-    config.name = reqdata.name;
-    config.state = reqdata.state;
-    config.save(function (err, fluffy) {
-  if (err) return console.error(err);
-  res.send("Config for Switch ''"+reqdata.name+"'' was saved!");
-});
-
-  })
 });
 
 //Function that sorts an array of objects by key

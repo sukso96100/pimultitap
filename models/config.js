@@ -11,7 +11,7 @@ var Configs = sequelize.define('Configs', {
 //Sync DB - Create Table unless exists.
 sequelize.sync();
 //Create Default configs
-Configs.findOne({where: {num: 0}, defaults: {name: 'Switch'+0, state:false}})
+Configs.findOne({where: {num: 0}})
   .then(function(config) {
     if(config==null){
       for(var i=0; i<8; i++){
