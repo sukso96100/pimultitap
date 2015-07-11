@@ -6,13 +6,10 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   //Query Config
   console.log("Querying Config from DB");
-  var query = SwitchesConfig.find().limit(8);
-  query.exec(function (err, config) {
-    if (err) return handleError(err);
-    console.log(config);
+  req.models.config.find({},8,function (err, configs) {
     config = sortByKey(config,'num');
-    res.render('settings', { title: 'Settings', state: config });
-  })
+    res.send(configs);
+  });
 });
 
 router.get('/load/:num', function(req, res, next) {
@@ -21,15 +18,36 @@ router.get('/load/:num', function(req, res, next) {
 
   // Query Config
   console.log("Querying Config from DB");
-  var query = SwitchesConfig.findOne({num:reqnum});
-  query.exec(function (err, config) {
-    if (err) return handleError(err);
-    console.log(config);
-      res.send(config);
-  })
+  req.models.config.one({num:reqnum},function (err, configs) {
+    res.send(configs);
+  });
 });
 
 router.post('/save/:num', function(req, res, next) {
+
+    var reqnum = req.params.num;
+    console.log(reqnum);
+    var reqdata = req.body;
+    console.log(reqdata);
+    req.models.config.one({ num:reqnum }, function (err, config) {
+        // SQL: "SELECT * FROM person WHERE surname = 'Doe'"
+
+        config.name = reqdata.name;
+        config.state = reqdata.state;
+        config.save(function (err) {
+            // err.msg = "under-age";
+            res.send("OK");
+        });
+    });
+
+
+
+
+
+
+
+
+
   console.log("POST /save/ Request");
 
   var reqnum = req.params.num;

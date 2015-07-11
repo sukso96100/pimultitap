@@ -1,8 +1,6 @@
 //excute this command on terminal tfor testing
 //DEBUG=rpi-relay-control:* npm start
 
-//sqlite orm
-var orm = require('orm');
 //
 var express = require('express');
 var path = require('path');
@@ -14,26 +12,11 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var settings = require('./routes/settings');
-
 var app = express();
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-//SQLite ORM - Open DB Connection
-app.use(orm.express("sqlite://config.db", {
-    define: function (db, models, next) {
-        models.config = db.define("switchconfig", {
-        num : Number,
-        name : String,
-        state : Boolean,
-    });
-        next();
-    }
-}));
-app.listen(80);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));

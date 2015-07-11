@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "forever start ./bin/www",
+    "start": "node ./bin/www",
     "stop": "forever stop ./bin/www"
   },
   "dependencies": {
@@ -14,6 +14,8 @@
     "express": "~4.12.4",
     "mongoose": "^4.0.6",
     "morgan": "~1.5.3",
-    "serve-favicon": "~2.2.1"
+    "sequelize": "^3.3.2",
+    "serve-favicon": "~2.2.1",
+    "sqlite3": "^3.0.8"
   }
 }

@@ -1,31 +1,19 @@
+var configdb = require('../models/config');
 var express = require('express');
 var router = express.Router();
-
+var Configs = configdb.Configs;
+var ConfigsArray = [];
+  // res.render('index', { title: 'RelaySwitch', state: config });
 /* GET home page. */
 router.get('/', function(req, res, next) {
+
+
   //Check if DB Table is empty
-  req.models.config.find({num : 0}, function (err, config) {
-        if (config.length){
-            console.log("DB Table is NOT empty!");
-        }else{
-          console.log("DB Table is EMPTY!");
-          //Create Default Config
-          for(var i=0;i<8;i++){
-            req.models.config.create({
-          num: i,
-          name: "Switch"+i,
-          state: false},
-          function (err, items) {
-            // err - description of the error or null
-            // items - array of inserted items
-          });}
-        }
-    });
-    //Query Config
-    console.log("Querying Config from DB");
-    req.models.config.find({},8,function (err, configs) {
-  
+  Configs.findAll({ limit: 8 }).then(function(configs) {
+  // projects will be an array of all Project instances
+  res.render('index', { title: 'RelaySwitch', state: configs });
   });
+
 });
 
 //Function that sorts an array of objects by key
