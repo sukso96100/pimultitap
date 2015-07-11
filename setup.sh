@@ -1,7 +1,7 @@
 #!
 
-echo "Installing Node.js"
-sudo apt-get install nodejs
+echo "Installing Node.js, Npm, node-semver"
+sudo apt-get install nodejs npm node-semver
 echo "Installing Required Node Packages"
 npm install
 echo "Installing Forever Package"
@@ -11,8 +11,8 @@ cd bower_components
 bower install
 cd ..
 
-echo "Installing Python3 and pip"
-suao apt-get install python3
+echo "Installing Python and pip"
+suao apt-get install python
 sudo python get-pip.py
 echo "Installing Python Packages - daemonocle"
 sudo pip install daemonocle
