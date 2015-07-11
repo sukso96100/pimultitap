@@ -1,14 +1,15 @@
+var configdb = require('../models/config');
 var express = require('express');
 var router = express.Router();
+var Configs = configdb.Configs;
 //DB
 
 /* GET Settings page. */
 router.get('/', function(req, res, next) {
   //Query Config
   console.log("Querying Config from DB");
-  req.models.config.find({},8,function (err, configs) {
-    config = sortByKey(config,'num');
-    res.send(configs);
+  Configs.findAll({ limit: 8 }).then(function(configs) {
+  res.render('settings', { title: 'RelaySwitch', state: configs });
   });
 });
 
@@ -18,9 +19,10 @@ router.get('/load/:num', function(req, res, next) {
 
   // Query Config
   console.log("Querying Config from DB");
-  req.models.config.one({num:reqnum},function (err, configs) {
-    res.send(configs);
-  });
+  Configs.findOne({where: {num: reqnum}})
+    .then(function(config) {
+      res.send(config);
+    });
 });
 
 router.post('/save/:num', function(req, res, next) {

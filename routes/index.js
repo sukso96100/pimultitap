@@ -2,15 +2,13 @@ var configdb = require('../models/config');
 var express = require('express');
 var router = express.Router();
 var Configs = configdb.Configs;
-var ConfigsArray = [];
   // res.render('index', { title: 'RelaySwitch', state: config });
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
 
-  //Check if DB Table is empty
+  //Query Config
   Configs.findAll({ limit: 8 }).then(function(configs) {
-  // projects will be an array of all Project instances
   res.render('index', { title: 'RelaySwitch', state: configs });
   });
 

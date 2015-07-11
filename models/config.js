@@ -8,7 +8,9 @@ var Configs = sequelize.define('Configs', {
   state: Sequelize.BOOLEAN
 });
 
+//Sync DB - Create Table unless exists.
 sequelize.sync();
+//Create Default configs
 Configs.findOne({where: {num: 0}, defaults: {name: 'Switch'+0, state:false}})
   .then(function(config) {
     if(config==null){
@@ -16,11 +18,7 @@ Configs.findOne({where: {num: 0}, defaults: {name: 'Switch'+0, state:false}})
         Configs.create({ num: i, name: 'Switch'+i, state:false });
       }
     }
-  })
-
-
-
-
+  });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
