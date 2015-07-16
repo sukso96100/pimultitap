@@ -1,7 +1,8 @@
 #!
 
-echo "Installing Node.js, Npm, node-semver"
-sudo apt-get install nodejs npm node-semver
+echo "=====Installing Node.js, Npm, node-semver====="
+wget http://node-arm.herokuapp.com/node_latest_armhf.deb
+sudo dpkg -i node_latest_armhf.deb
 echo "Installing Required Node Packages"
 npm install
 echo "Installing Forever Package"
