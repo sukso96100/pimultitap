@@ -16,7 +16,7 @@ db.serialize(function() {
 
 router.get('/getinfo', function(req, res, next) {
   var fs = require('fs');
-  var ConfigFile = fs.readFileSync('../config.json', 'utf8', function(err, data) {
+  var ConfigFile = fs.readFileSync('./config.json', 'utf8', function(err, data) {
   // the data is passed to the callback in the second 
     console.log(data);
     res.send(data);
