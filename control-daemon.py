@@ -34,7 +34,7 @@ def main():
     while True:
         db = SqliteDatabase('config.db', threadlocals=True)
 
-        class Configs(Model):
+        class config(Model):
             NUM = IntegerField()
             NAME = CharField()
             STATE = BooleanField()
@@ -42,7 +42,7 @@ def main():
             class Meta:
                 database = db
 
-        for item in Configs.select():
+        for item in config.select():
             print(item.NAME)
             GPIO.output(item.NUM+2,item.STATE)
 
