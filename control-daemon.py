@@ -29,7 +29,7 @@ def main():
 
     print ("Setting Up GPIO from 2 to 9")
     for i in range(2, 10):
-    GPIO.setup(i, GPIO.OUT)
+        GPIO.setup(i, GPIO.OUT)
 
     while True:
         db = SqliteDatabase('config.db', threadlocals=True)
