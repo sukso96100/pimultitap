@@ -43,17 +43,22 @@ router.post('/save/:num', function(req, res, next) {
     var reqdata = req.body;
     console.log(reqdata);
     var stateboolean;
-    if(reqdata.state==0){
-      stateboolean = false;
+    if(reqdata.state==false){
+      stateboolean = 0;
     }else{
-      stateboolean = true;
+      stateboolean = 1;
     }
     db.serialize(function() {
-      db.run("UPDATE config SET NAME="+reqdata.name+",STATE="+stateboolean+" WHERE NUM="+reqnum,
+      console.log("UPDATE config SET NAME='"+reqdata.name+"',STATE="+stateboolean+" WHERE NUM="+reqnum);
+      db.run("UPDATE config SET NAME='"+reqdata.name+"',STATE="+stateboolean+" WHERE NUM="+reqnum,
       function(err, row) {
-          if(!err){
-            res.send("OK");
-          }
+        if(err==undefined){
+          res.send("OK");
+        }else {
+          console.log(err);
+          throw err;
+        }
+
         });
       });
 
