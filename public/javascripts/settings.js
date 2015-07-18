@@ -34,6 +34,8 @@ function savePref(){
   var req = new XMLHttpRequest();
   req.open('POST', '/settings/save/'+num, true);
   req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  console.log(toggle.checked);
+  req.send(JSON.stringify({name:nameInput.value, state:toggle.checked}));
   req.onreadystatechange = function() {
     //Call a function when the state changes.
 	if(req.readyState == 4 && req.status == 200) {
@@ -42,5 +44,5 @@ function savePref(){
       menuitem.innerHTML = nameInput.value;
 	 }
   }
-  req.send(JSON.stringify({name:nameInput.value, state:toggle.checked}));
+
 }
