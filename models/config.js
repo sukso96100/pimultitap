@@ -1,6 +1,6 @@
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('config.db');
-var gpio = require('../gpio/gpio')
+var gpio = require('../gpio/gpio');
 var gpios = gpio.gpios;
 
 db.serialize(function() {
