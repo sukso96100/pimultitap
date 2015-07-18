@@ -24,23 +24,23 @@ def main():
 
     #RPi GPIO Setup
 
-    print ("Setting GPIO Mode as BCM")
+    logging.debug ("Setting GPIO Mode as BCM")
     GPIO.setmode(GPIO.BCM)
 
-    print ("Setting Up GPIO from 2 to 9")
+    logging.debug ("Setting Up GPIO from 2 to 9")
     for i in range(2, 10):
         GPIO.setup(i, GPIO.OUT)
 
     while True:
         db = sqlite3.connect('config.db')
         cursor = db.cursor()
-        print("db Test")
+        logging.debug("querying db)
         cursor.execute('SELECT * FROM config ORDER BY NUM')
         mydata = cursor.fetchall()
-        print (mydata)
+        logging.debug (mydata)
 
         for item in mydata:
-            print(item[1])
+            logging.debug(item[1])
             GPIO.output(item[0]+2,item[2])
 
 if __name__ == '__main__':
