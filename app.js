@@ -2,6 +2,7 @@
 //DEBUG=rpi-relay-control:* npm start
 
 //
+require('./gpio/gpio');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');

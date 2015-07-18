@@ -14,6 +14,7 @@
     "express": "~4.12.4",
     "gpio": "^0.2.7",
     "morgan": "~1.5.3",
+    "onoff": "^1.0.2",
     "serve-favicon": "~2.2.1",
     "sqlite3": "^3.0.8"
   }
