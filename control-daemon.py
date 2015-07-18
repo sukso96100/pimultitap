@@ -34,7 +34,7 @@ def main():
     while True:
         db = sqlite3.connect('config.db')
         cursor = db.cursor()
-        logging.debug("querying db)
+        logging.debug("querying db")
         cursor.execute('SELECT * FROM config ORDER BY NUM')
         mydata = cursor.fetchall()
         logging.debug (mydata)
