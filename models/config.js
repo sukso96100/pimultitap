@@ -1,5 +1,7 @@
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('config.db');
+var gpio = require('../gpio/gpio')
+var gpios = gpio.gpios;
 
 db.serialize(function() {
   db.run("CREATE TABLE IF NOT EXISTS config(NUM    INTERGER      NOT NULL,NAME   VARCHAR(255)  NOT NULL,STATE  TINYINT(1)    NOT NULL)");
@@ -9,6 +11,10 @@ db.serialize(function() {
       for(var i=0; i<8; i++){
         console.log("INSERT INTO 'config'('NUM','NAME','STATE') VALUES ('"+i+"','Switch"+i+"','0')");
       db.run("INSERT INTO 'config'('NUM','NAME','STATE') VALUES ('"+i+"','Switch"+i+"','0')");
+      }
+    }else{
+      for(var i=0; i<8; i++){
+        gpios[i].writeSync(rows[i].STATE);
       }
     }
   });
