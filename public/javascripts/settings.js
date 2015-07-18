@@ -12,9 +12,13 @@ function loadPref(num){
 	if(req.readyState == 4 && req.status == 200) {
 		// alert(req.responseText);
     var valueItem = JSON.parse(req.responseText)
-    nameInput.value = valueItem.name;
-    name.innerHTML = valueItem.name;
-    toggle.checked = valueItem.state;
+    nameInput.value = valueItem.NAME;
+    name.innerHTML = valueItem.NAME;
+    if(valueItem.STATE == 0){
+      toggle.checked = false;
+    }else{
+      toggle.checked = true;
+    }
     console.log(valueItem);
 	 }
   }

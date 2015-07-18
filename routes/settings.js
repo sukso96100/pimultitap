@@ -1,28 +1,39 @@
-var configdb = require('../models/config');
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('config.db');
 var express = require('express');
 var router = express.Router();
-var Configs = configdb.Configs;
 //DB
 
 /* GET Settings page. */
 router.get('/', function(req, res, next) {
   //Query Config
   console.log("Querying Config from DB");
-  Configs.findAll({ limit: 8 }).then(function(configs) {
-  res.render('settings', { title: 'RelaySwitch', state: configs });
-  });
+  db.serialize(function() {
+    db.all("SELECT * FROM config", function(err, rows) {
+      console.log(rows);
+      rows = sortByKey(rows,"NUM");
+       res.render('settings', { title: 'RelaySwitch', state: rows });
+     });
+    });
 });
 
 router.get('/load/:num', function(req, res, next) {
   var reqnum = req.params.num;
   console.log(reqnum);
 
+  db.serialize(function() {
+    db.get("SELECT * FROM config WHERE NUM="+reqnum, function(err, row) {
+      console.log(row);
+       res.send(row);
+     });
+    });
+
   // Query Config
   console.log("Querying Config from DB");
-  Configs.findOne({where: {num: reqnum}})
-    .then(function(config) {
-      res.send(config);
-    });
+  // Configs.findOne({where: {num: reqnum}})
+  //   .then(function(config) {
+  //     res.send(config);
+  //   });
 });
 
 router.post('/save/:num', function(req, res, next) {
@@ -31,15 +42,10 @@ router.post('/save/:num', function(req, res, next) {
     console.log(reqnum);
     var reqdata = req.body;
     console.log(reqdata);
-
-    Configs.findOne({ where: {num: reqnum}})
-    .then(function(config) {
-      config.name = reqdata.name;
-      config.state = reqdata.state;
-      config.save().then(function() {
-        res.send("Config for Switch ''"+reqdata.name+"'' was saved!");
+    db.serialize(function() {
+      db.run("UPDATE config SET NAME="+reqdata.name+" WHERE NUM="+reqnum);
       });
-    });
+
 });
 
 //Function that sorts an array of objects by key

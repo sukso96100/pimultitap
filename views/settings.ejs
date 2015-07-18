@@ -32,10 +32,10 @@
     </paper-menu>
     <paper-menu>
       <% for(var i=0; i<state.length; i++) {%>
-        <paper-icon-item onclick="loadPref(<%= state[i].num %>)">
+        <paper-icon-item onclick="loadPref(<%= state[i].NUM %>)">
           <iron-icon icon="extension" item-icon></iron-icon>
-          [<%= state[i].num %>]
-          <span id="i<%= state[i].num %>"><%= state[i].name %></span>
+          [<%= state[i].NUM %>]
+          <span id="i<%= state[i].NUM %>"><%= state[i].NAME %></span>
         </paper-icon-item>
       <% } %>
    </paper-menu>
