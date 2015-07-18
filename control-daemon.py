@@ -3,7 +3,7 @@ import sys
 import time
 
 import daemonocle
-from peewee import *
+import sqlite3
 import RPi.GPIO as GPIO
 
 def cb_shutdown(message, code):
@@ -32,19 +32,16 @@ def main():
         GPIO.setup(i, GPIO.OUT)
 
     while True:
-        db = SqliteDatabase('config.db', threadlocals=True)
+        db = sqlite3.connect('config.db')
+        cursor = db.cursor()
+        print("db Test")
+        cursor.execute('SELECT * FROM config ORDER BY NUM')
+        mydata = cursor.fetchall()
+        print (mydata)
 
-        class config(Model):
-            NUM = IntegerField()
-            NAME = CharField()
-            STATE = BooleanField()
-
-            class Meta:
-                database = db
-
-        for item in config.select():
-            print(item.NAME)
-            GPIO.output(item.NUM+2,item.STATE)
+        for item in mydata:
+            print(item[1])
+            GPIO.output(item[0]+2,item[2])
 
 if __name__ == '__main__':
     daemon = daemonocle.Daemon(

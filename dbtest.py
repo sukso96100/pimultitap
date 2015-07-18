@@ -7,8 +7,9 @@ import sqlite3
 db = sqlite3.connect('config.db')
 cursor = db.cursor()
 print("db Test")
-for row in cursor.execute('SELECT * FROM config ORDER BY NUM'):
-        print row
+cursor.execute('SELECT * FROM config ORDER BY NUM')
+mydata = cursor.fetchall()
+print (mydata)
 
 
 
