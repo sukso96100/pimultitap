@@ -1,27 +1,23 @@
-var Sequelize = require('sequelize');
-var sequelize = new Sequelize('sqlite://config.db');
-var db = [];
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database(':config:');
 
-var Configs = sequelize.define('Configs', {
-  num: Sequelize.INTEGER,
-  name: Sequelize.STRING,
-  state: Sequelize.BOOLEAN
-});
+db.serialize(function() {
+  db.run("CREATE TABLE config(
+   NUM    INTERGER      NOT NULL,
+   NAME   VARCHAR(255)  NOT NULL,
+   STATE  TINYINT(1)    NOT NULL);");
 
-//Sync DB - Create Table unless exists.
-sequelize.sync();
-//Create Default configs
-Configs.findOne({where: {num: 0}})
-  .then(function(config) {
-    if(config==null){
+   db.run("SELECT * FROM config", function(err, rows) {
+    if(rows == undefined){
       for(var i=0; i<8; i++){
-        Configs.create({ num: i, name: 'Switch'+i, state:false });
+      db.run("INSERT INTO config (NUM, NAME, STATE) VALUES ("+i+",Switch"+i+",0)");
       }
     }
   });
+});
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-db.Configs = Configs;
-
+process.on('exit', function() {
+  // Add shutdown logic here.
+  db.close();
+});
 module.exports = db;
