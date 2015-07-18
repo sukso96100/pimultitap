@@ -10,11 +10,11 @@ db = SqliteDatabase('config.db', threadlocals=True)
 
 
 class Configs(Model):
-    num = IntegerField()
-    name = CharField()
-    state = BooleanField()
+    NUM = IntegerField()
+    NAME = CharField()
+    STATE = BooleanField()
 
     class Meta:
         database = db
 for item in Configs.select():
-    print(item.name)
+    print(item.NAME)

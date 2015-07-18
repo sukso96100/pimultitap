@@ -30,21 +30,21 @@ def main():
     print ("Setting Up GPIO from 2 to 9")
     for i in range(2, 10):
     GPIO.setup(i, GPIO.OUT)
-    
+
     while True:
         db = SqliteDatabase('config.db', threadlocals=True)
 
         class Configs(Model):
-            num = IntegerField()
-            name = CharField()
-            state = BooleanField()
+            NUM = IntegerField()
+            NAME = CharField()
+            STATE = BooleanField()
 
             class Meta:
                 database = db
 
         for item in Configs.select():
-            print(item.name)
-            GPIO.output(item.num+2,item.state)
+            print(item.NAME)
+            GPIO.output(item.NUM+2,item.STATE)
 
 if __name__ == '__main__':
     daemon = daemonocle.Daemon(
