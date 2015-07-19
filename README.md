@@ -1,4 +1,4 @@
-# rpi-relay-control
+# PiMultiTap
 Node.js based relay module power control panel for Raspberry Pi
 
 Start without debug
