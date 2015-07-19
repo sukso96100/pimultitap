@@ -47,28 +47,20 @@ router.post('/save/:num', function(req, res, next) {
     var stateboolean;
     if(reqdata.state==false){
       stateboolean = 0;
-      gpios[reqnum].write(0, function (err) { // Asynchronous write.
-      if (err) {
-        console.log(err);
-        throw err;
-      }
-    });
-      console.log("gpio off");
     }else{
       stateboolean = 1;
-      gpios[reqnum].write(1, function (err) { // Asynchronous write.
-      if (err) {
-        console.log(err);
-        throw err;
-      }
-    });
-      console.log("gpio on");
     }
     db.serialize(function() {
       console.log("UPDATE config SET NAME='"+reqdata.name+"',STATE="+stateboolean+" WHERE NUM="+reqnum);
       db.run("UPDATE config SET NAME='"+reqdata.name+"',STATE="+stateboolean+" WHERE NUM="+reqnum,
       function(err, row) {
         if(err==undefined){
+          gpios[reqnum].write(stateboolean, function (err) { // Asynchronous write.
+          if (err) {
+            console.log(err);
+            throw err;
+          }
+        });
           res.send("OK");
         }else {
           console.log(err);
