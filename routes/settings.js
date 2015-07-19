@@ -55,13 +55,14 @@ router.post('/save/:num', function(req, res, next) {
       db.run("UPDATE config SET NAME='"+reqdata.name+"',STATE="+stateboolean+" WHERE NUM="+reqnum,
       function(err, row) {
         if(err==undefined){
+
+          res.send("OK");
           gpios[reqnum].write(stateboolean, function (err) { // Asynchronous write.
           if (err) {
             console.log(err);
             throw err;
           }
         });
-          res.send("OK");
         }else {
           console.log(err);
           throw err;
