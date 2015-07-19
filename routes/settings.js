@@ -47,11 +47,19 @@ router.post('/save/:num', function(req, res, next) {
     var stateboolean;
     if(reqdata.state==false){
       stateboolean = 0;
-      gpios[reqnum].writeSync(0);
+      gpios[reqnum].write(0, function (err) { // Asynchronous write.
+      if (err) {
+        throw err;
+      }
+    });
       console.log("gpio off");
     }else{
       stateboolean = 1;
-      gpios[reqnum].writeSync(1);
+      gpios[reqnum].write(1, function (err) { // Asynchronous write.
+      if (err) {
+        throw err;
+      }
+    });
       console.log("gpio on");
     }
     db.serialize(function() {
