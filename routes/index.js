@@ -14,6 +14,18 @@ db.serialize(function() {
   });
 });
 
+router.get('/getinfo', function(req, res, next) {
+  var fs;
+  var infoConfigFile;
+  infoConfigFile = '../config.json';
+  fs = require('fs');
+  var infoConfig = JSON.parse(
+      fs.readFileSync(infoConfigFile)
+  );
+
+  res.send("infoConfig");
+});
+
 //Function that sorts an array of objects by key
 function sortByKey(array, key) {
   return array.sort(function(a, b) {
