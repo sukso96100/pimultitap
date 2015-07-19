@@ -2,8 +2,7 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('config.db');
 var express = require('express');
 var router = express.Router();
-var gpio = require('../gpio/gpio');
-var gpios = gpio.gpios;
+var Gpios = require('../gpio/gpio');
 //DB
 
 /* GET Settings page. */
@@ -55,9 +54,9 @@ router.post('/save/:num', function(req, res, next) {
       db.run("UPDATE config SET NAME='"+reqdata.name+"',STATE="+stateboolean+" WHERE NUM="+reqnum,
       function(err, row) {
         if(err==undefined){
-
+          Gpios[reqnum].writeSync(stateboolean);
           res.send("OK");
-          gpios[reqnum].writeSync(stateboolean);
+
         }else {
           console.log(err);
           throw err;
