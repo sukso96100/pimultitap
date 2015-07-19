@@ -48,9 +48,11 @@ router.post('/save/:num', function(req, res, next) {
     if(reqdata.state==false){
       stateboolean = 0;
       gpios[reqnum].writeSync(0);
+      console.log("gpio off");
     }else{
       stateboolean = 1;
       gpios[reqnum].writeSync(1);
+      console.log("gpio on");
     }
     db.serialize(function() {
       console.log("UPDATE config SET NAME='"+reqdata.name+"',STATE="+stateboolean+" WHERE NUM="+reqnum);
