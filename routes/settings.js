@@ -49,6 +49,7 @@ router.post('/save/:num', function(req, res, next) {
       stateboolean = 0;
       gpios[reqnum].write(0, function (err) { // Asynchronous write.
       if (err) {
+        console.log(err);
         throw err;
       }
     });
@@ -57,6 +58,7 @@ router.post('/save/:num', function(req, res, next) {
       stateboolean = 1;
       gpios[reqnum].write(1, function (err) { // Asynchronous write.
       if (err) {
+        console.log(err);
         throw err;
       }
     });
