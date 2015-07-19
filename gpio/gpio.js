@@ -15,4 +15,12 @@ for(var i=0; i<gpios.length; i++){
   console.log("[off]testing gpio"+i);
 }
 console.log(gpios);
+function exit() {
+  for(var i=0; i<gpios.length; i++){
+    gpios[i].unexport();
+    console.log("Cleaning Up gpio"+i);
+  }
+  process.exit();
+}
+process.on('SIGINT',exit);
 module.exports = gpios;
