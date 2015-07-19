@@ -6,5 +6,5 @@ for(var i=2; i<9; i++){
   gpios.push(gpioItem);
   console.log("setting up gpio"+i);
 }
-
+console.log(gpios);
 module.exports = gpios;
