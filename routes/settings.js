@@ -57,12 +57,7 @@ router.post('/save/:num', function(req, res, next) {
         if(err==undefined){
 
           res.send("OK");
-          gpios[reqnum].write(stateboolean, function (err) { // Asynchronous write.
-          if (err) {
-            console.log(err);
-            throw err;
-          }
-        });
+          gpios[reqnum].writeSync(stateboolean);
         }else {
           console.log(err);
           throw err;
