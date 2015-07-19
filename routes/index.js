@@ -16,13 +16,8 @@ db.serialize(function() {
 
 router.get('/getinfo', function(req, res, next) {
   var fs;
-  var infoConfigFile;
-  infoConfigFile = '../config.json';
   fs = require('fs');
-  var infoConfig = JSON.parse(
-      fs.readFileSync(infoConfigFile)
-  );
-
+  var infoConfig = JSON.parse(fs.readFileSync('../config.json'));
   res.send("infoConfig");
 });
 
