@@ -15,10 +15,13 @@ db.serialize(function() {
 });
 
 router.get('/getinfo', function(req, res, next) {
-  var fs;
-  fs = require('fs');
-  var infoConfig = JSON.parse(fs.readFileSync('../config.json'));
-  res.send("infoConfig");
+  var fs = require('fs');
+  var ConfigFile = fs.readFileSync('../config.json', 'utf8', function(err, data) {
+  // the data is passed to the callback in the second 
+    console.log(data);
+    res.send(data);
+  });
+
 });
 
 //Function that sorts an array of objects by key
