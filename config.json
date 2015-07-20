@@ -1,4 +1,5 @@
 {
- "name" : "PiMultiTap-B+",
- "desc" : "PiMultiTap Running On RPi B+"
+  "pimultitap" : "PiMultiTap",
+  "name" : "PiMultiTap-B+",
+  "desc" : "PiMultiTap Running On RPi B+"
 }
