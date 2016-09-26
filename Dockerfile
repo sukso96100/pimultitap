@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM armv7/armhf-ubuntu:xenial
 
 RUN apt-get update
 RUN apt-get install -y curl sudo build-essential apt-utils python language-pack-ko libfontconfig1 libfontconfig1-dbg libfontconfig1-dev
